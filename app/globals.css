@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-brand-teal: #0f766e;
+  --color-brand-teal-dark: #134e4a;
+  --color-brand-cream: #fffbeb;
+  --color-brand-saffron: #f97316;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-body;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 
+           bg-teal-700 hover:bg-teal-800 text-white font-semibold rounded-lg 
+           transition-all duration-200 shadow-md hover:shadow-lg 
+           focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2
+           disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 
+           border-2 border-teal-700 text-teal-700 hover:bg-teal-50 
+           font-semibold rounded-lg transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2
+           disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+
+  .card {
+    @apply bg-white rounded-xl shadow-md border border-gray-100 
+           hover:shadow-lg transition-shadow duration-200;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2.5 border border-gray-300 rounded-lg 
+           bg-white text-gray-900 placeholder-gray-400
+           focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent
+           transition-colors duration-150;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-gray-700 mb-1.5;
+  }
+
+  .error-text {
+    @apply text-sm text-red-600 mt-1;
+  }
+}
