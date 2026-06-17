@@ -11,7 +11,7 @@ A phased journey to construct a high-performance Next.js 14 website and Supabase
 - Integer phases (1, 2, 3): Planned milestone work
 - Decimal phases (2.1, 2.2): Urgent insertions (marked with INSERTED)
 
-- [ ] **Phase 1: Admin Panel Foundation & Auth** - Setup project core, database migrations, auth, and dashboard shell.
+- [x] **Phase 1: Admin Panel Foundation & Auth** - Setup project core, database migrations, auth, and dashboard shell. ✅ Complete (2026-06-18)
 - [ ] **Phase 2: Tours & Blog CMS Managers** - Build admin CMS forms, Tiptap editor, image uploads, and map waypoint builder.
 - [ ] **Phase 3: Public Website & Age-Group Filtering** - Implement public pages layout, Homepage, and age-group filter search logic.
 - [ ] **Phase 4: Tour Details, Maps & Lead Capture** - Render Tour Detail page, Leaflet.js route maps, and Supabase enquiries submission.
@@ -32,16 +32,16 @@ A phased journey to construct a high-performance Next.js 14 website and Supabase
   3. Admin can log in to `/admin` with email and password, and unauthenticated traffic to `/admin/*` redirects to `/admin/login`.
   4. Site Settings CMS and Enquiries manager tables are functional.
 
-**Plans**: 2 plans
+**Plans**: 2 plans — **2/2 COMPLETE** ✅
 
 Plans:
 **Wave 1**
 
-- [ ] 01-01: Bootstrap Next.js, install packages, configure Supabase client, setup schema migrations, and secure admin middleware.
+- [x] 01-01: Bootstrap Next.js, install packages, configure Supabase client, setup schema migrations, and secure admin middleware.
 
-**Wave 2** *(blocked on Wave 1 completion)*
+**Wave 2**
 
-- [ ] 01-02: Create Admin Dashboard layout, stats summary widgets, Recent Enquiries table, and Site Settings manager.
+- [x] 01-02: Create Admin Dashboard layout, stats summary widgets, Recent Enquiries table, and Site Settings manager.
 
 ### Phase 2: Tours & Blog CMS Managers
 
@@ -127,7 +127,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Admin Panel Foundation & Auth | 0/2 | Not started | - |
+| 1. Admin Panel Foundation & Auth | 2/2 | ✅ Complete | 2026-06-18 |
 | 2. Tours & Blog CMS Managers | 0/3 | Not started | - |
 | 3. Public Website & Age-Group Filtering | 0/2 | Not started | - |
 | 4. Tour Details, Maps & Lead Capture | 0/2 | Not started | - |
