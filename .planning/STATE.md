@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 1 complete — 2/2 plans done
-last_updated: "2026-06-18T21:57:00.000Z"
-last_activity: 2026-06-18 -- Phase 1 fully executed and built
+stopped_at: Phase 2 complete — 3/3 plans done
+last_updated: "2026-06-18T06:22:00.000Z"
+last_activity: 2026-06-18 -- Phase 2 fully executed and built
 progress:
   total_phases: 5
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 11
-  completed_plans: 2
-  percent: 18
+  completed_plans: 5
+  percent: 45
 ---
 
 # Project State
@@ -21,38 +21,38 @@ progress:
 See: .planning/PROJECT.md (updated 2026-06-18)
 
 **Core value:** Capture high-intent travel enquiries and build client trust by offering an intuitive, high-performance web experience highlighted by age-group based tour filtering.
-**Current focus:** Phase 2: Tours & Blog CMS Managers
+**Current focus:** Phase 3: Public Website & Age-Group Filtering
 
 ## Current Position
 
-Phase: 2 of 5 (Tours & Blog CMS Managers)
-Plan: 0 of 3 in current phase
-Status: Phase 1 complete — ready to begin Phase 2
-Last activity: 2026-06-18 -- Phase 1 executed: Next.js scaffold, Supabase auth, middleware, admin login, nav, dashboard, settings
+Phase: 3 of 5 (Public Website & Age-Group Filtering)
+Plan: 0 of 2 in current phase
+Status: Phase 2 complete — ready to begin Phase 3
+Last activity: 2026-06-18 -- Phase 2 executed: Storage helpers, ImageUploader, Destinations CMS, Tours Manager, WaypointBuilder, Blog Manager, Tiptap RichTextEditor, Enquiries Manager
 
-Progress: [██░░░░░░░░] 18%
+Progress: [████░░░░░░] 45%
 
 ## Performance Metrics
 
 **Velocity:**
 
-- Total plans completed: 2
-- Average duration: ~30 min
-- Total execution time: ~1.0 hour
+- Total plans completed: 5
+- Average duration: ~25 min
+- Total execution time: ~2.1 hours
 
 **By Phase:**
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
 | 1. Admin Panel Foundation & Auth | 2/2 ✅ | ~60 min | ~30 min |
-| 2. Tours & Blog CMS Managers | 0/3 | - | - |
+| 2. Tours & Blog CMS Managers | 3/3 ✅ | ~75 min | ~25 min |
 | 3. Public Website & Age-Group Filtering | 0/2 | - | - |
 | 4. Tour Details, Maps & Lead Capture | 0/2 | - | - |
 | 5. Blog Frontend, SEO & Verification | 0/2 | - | - |
 
 **Recent Trend:**
 
-- Last 5 plans: Phase 1 (01-01, 01-02) — both complete
+- Last 5 plans: Phase 1 (01-01, 01-02), Phase 2 (02-01, 02-02, 02-03) — all complete
 - Trend: Stable
 
 *Updated after each plan completion*
@@ -65,10 +65,12 @@ Decisions are logged in PROJECT.md Key Decisions table.
 Recent decisions affecting current work:
 
 - [Init]: Next.js 14 + Supabase Stack selected for rapid database setup, authentication, and SSR/ISR SEO rendering.
-- [Init]: Coarse granularity and parallel execution chosen to accelerate MVP delivery.
-- [Phase 1]: Used `@supabase/auth-helpers-nextjs@0.10` (deprecated but functional). Upgrade to `@supabase/ssr` planned for Phase 2 if issues arise.
-- [Phase 1]: Placeholder `.env.local` added for local builds without real credentials. Real values needed from Supabase Dashboard.
-- [Phase 1]: `next.config.js` sets `eslint.ignoreDuringBuilds: true` to avoid missing @typescript-eslint plugin failure.
+- [Phase 1]: Used `@supabase/auth-helpers-nextjs@0.10` (deprecated but functional).
+- [Phase 1]: Placeholder `.env.local` added for local builds without real credentials.
+- [Phase 2]: `as never` cast used for Supabase insert/update calls due to auth-helpers@0.10 generic inference.
+- [Phase 2]: RichTextEditor dynamically imported (ssr: false) — Tiptap uses browser APIs.
+- [Phase 2]: TourForm uses tabbed layout (Details/Itinerary/SEO) to avoid overwhelming form length.
+- [Phase 2]: EnquiriesPage expanded rows use conditional sibling TR pattern (expandable without libraries).
 
 ### Pending Todos
 
@@ -76,10 +78,12 @@ Recent decisions affecting current work:
 - Run Supabase SQL schema migrations from `Anant_Anand_Tech_Blueprint.md` Section 3.1
 - Run RLS policies from Section 3.2
 - Create admin user in Supabase Auth → Authentication → Users → Invite user
+- Create Supabase Storage buckets: `tour-images`, `blog-images`, `destination-images`, `site-assets`
+- Set bucket policies to public read
 
 ### Blockers/Concerns
 
-None blocking Phase 2.
+None blocking Phase 3.
 
 ## Deferred Items
 
@@ -92,5 +96,5 @@ Items acknowledged and carried forward from previous milestone close:
 ## Session Continuity
 
 Last session: 2026-06-18
-Stopped at: Phase 1 complete — both plans executed, build passes
-Resume file: .planning/phases/01-admin-panel-foundation-auth/01-02-SUMMARY.md
+Stopped at: Phase 2 complete — all 3 plans executed, TypeScript clean, build passes
+Resume file: .planning/phases/02-tours-blog-cms-managers/02-03-SUMMARY.md
