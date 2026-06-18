@@ -1,43 +1,49 @@
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
-import { formatDistanceToNow, format } from 'date-fns';
+import { clsx, type ClassValue } from "clsx"
+import { twMerge } from "tailwind-merge"
 
-/** Merge Tailwind CSS classes with clsx */
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return twMerge(clsx(inputs))
 }
 
-/** Format a price in Indian Rupees */
-export function formatPrice(amount: number): string {
-  return new Intl.NumberFormat('en-IN', {
-    style: 'currency',
-    currency: 'INR',
-    maximumFractionDigits: 0,
-  }).format(amount);
+/**
+ * Format a date string or Date into a localized short date.
+ * e.g. "18 Jun 2026"
+ */
+export function formatDate(date: string | Date | null | undefined): string {
+  if (!date) return '—';
+  try {
+    return new Intl.DateTimeFormat('en-IN', {
+      day: 'numeric',
+      month: 'short',
+      year: 'numeric',
+    }).format(new Date(date));
+  } catch {
+    return String(date);
+  }
 }
 
-/** Format a date string to a readable format */
-export function formatDate(dateString: string): string {
-  return format(new Date(dateString), 'dd MMM yyyy');
-}
+/**
+ * Format a date string relative to now.
+ * e.g. "2 days ago", "just now", "3 months ago"
+ */
+export function formatRelativeDate(date: string | Date | null | undefined): string {
+  if (!date) return '—';
+  try {
+    const d = new Date(date);
+    const diffMs = Date.now() - d.getTime();
+    const diffSecs = Math.floor(diffMs / 1000);
+    const diffMins = Math.floor(diffSecs / 60);
+    const diffHours = Math.floor(diffMins / 60);
+    const diffDays = Math.floor(diffHours / 24);
+    const diffMonths = Math.floor(diffDays / 30);
 
-/** Format a date relative to now */
-export function formatRelativeDate(dateString: string): string {
-  return formatDistanceToNow(new Date(dateString), { addSuffix: true });
-}
-
-/** Truncate a string to a given length */
-export function truncate(str: string, length: number): string {
-  if (str.length <= length) return str;
-  return str.slice(0, length).trimEnd() + '…';
-}
-
-/** Generate a URL-safe slug from a title */
-export function generateSlug(title: string): string {
-  return title
-    .toLowerCase()
-    .trim()
-    .replace(/[^\w\s-]/g, '')
-    .replace(/[\s_-]+/g, '-')
-    .replace(/^-+|-+$/g, '');
+    if (diffSecs < 60) return 'just now';
+    if (diffMins < 60) return `${diffMins} min ago`;
+    if (diffHours < 24) return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+    if (diffDays < 30) return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+    if (diffMonths < 12) return `${diffMonths} month${diffMonths > 1 ? 's' : ''} ago`;
+    return formatDate(date);
+  } catch {
+    return formatDate(date);
+  }
 }

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Playfair_Display, Poppins, Tiro_Devanagari_Sanskrit } from 'next/font/google';
+import { Inter, Playfair_Display, Poppins, Tiro_Devanagari_Sanskrit, Instrument_Sans, IBM_Plex_Sans } from 'next/font/google';
 import './globals.css';
 
 const inter = Inter({
@@ -56,6 +56,15 @@ export const metadata: Metadata = {
   },
 };
 
+import PublicLayoutProvider from '@/components/public/PublicLayoutProvider';
+import WhatsAppButton from '@/components/public/WhatsAppButton';
+import { cn } from "@/lib/utils";
+
+const ibmPlexSansHeading = IBM_Plex_Sans({subsets:['latin'], weight: ['400', '500', '600', '700'], variable:'--font-heading'});
+
+const instrumentSans = Instrument_Sans({subsets:['latin'],variable:'--font-sans'});
+
+
 export default function RootLayout({
   children,
 }: {
@@ -64,9 +73,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable} ${poppins.variable} ${tiroDevanagari.variable}`}
+      className={cn(inter.variable, playfair.variable, poppins.variable, tiroDevanagari.variable, "font-sans", instrumentSans.variable, ibmPlexSansHeading.variable)}
     >
-      <body className="font-body bg-white text-gray-900 antialiased">{children}</body>
+      <body className="font-body bg-white text-gray-900 antialiased">
+        <PublicLayoutProvider>{children}</PublicLayoutProvider>
+        <WhatsAppButton />
+      </body>
     </html>
   );
 }
