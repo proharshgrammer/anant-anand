@@ -2,12 +2,21 @@
 
 import { createAdminClient } from '@/lib/supabase/admin';
 
+async function ensureBucketPublic(supabase: ReturnType<typeof createAdminClient>, bucket: string) {
+  const { data: existing } = await supabase.storage.getBucket(bucket);
+  if (existing && !existing.public) {
+    await supabase.storage.updateBucket(bucket, { public: true });
+  }
+}
+
 export async function uploadImageAction(formData: FormData) {
   const bucket = formData.get('bucket') as string;
   const folder = formData.get('folder') as string;
   const file = formData.get('file') as File;
 
   const supabase = createAdminClient();
+
+  await ensureBucketPublic(supabase, bucket);
 
   const ext = file.name.split('.').pop();
   const timestamp = Date.now();
