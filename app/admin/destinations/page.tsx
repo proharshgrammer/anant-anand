@@ -7,9 +7,8 @@ import AdminNav from '@/components/admin/AdminNav';
 import DestinationForm from '@/components/admin/DestinationForm';
 import {
   getDestinations,
-  deleteDestination,
-  updateDestination,
 } from '@/lib/supabase/queries/destinations';
+import { deleteDestination, updateDestination } from '@/app/actions/destinations';
 import type { Destination } from '@/types';
 
 export default function DestinationsPage() {

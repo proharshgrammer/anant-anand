@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+
+# *
+User-agent: *
+Disallow: /admin
+
+# Host
+Host: https://anantanandtourpackages.in
+
+# Sitemaps
+Sitemap: https://anantanandtourpackages.in/sitemap.xml

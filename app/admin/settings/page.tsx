@@ -6,6 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import AdminNav from '@/components/admin/AdminNav';
 import { createClient } from '@/lib/supabase/client';
+import { updateSettings, type SettingsActionResult } from '@/app/actions/settings';
 import type { SiteSettings } from '@/types';
 import {
   Save,
@@ -148,15 +149,17 @@ export default function SettingsPage() {
   const onSubmit = async (data: SettingsForm) => {
     setSaveStatus('saving');
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const { error } = await (supabase as any)
-        .from('site_settings')
-        .update({ ...data, updated_at: new Date().toISOString() })
-        .eq('id', 1);
+      const formData = new FormData();
+      Object.entries(data).forEach(([key, val]) => formData.append(key, String(val ?? '')));
 
-      if (error) throw error;
-      setSaveStatus('success');
-      reset(data); // reset dirty state
+      const result: SettingsActionResult = await updateSettings(formData);
+
+      if (result.success) {
+        setSaveStatus('success');
+        reset(result.data as unknown as SettingsForm);
+      } else {
+        setSaveStatus('error');
+      }
       setTimeout(() => setSaveStatus('idle'), 3000);
     } catch {
       setSaveStatus('error');
@@ -198,7 +201,7 @@ export default function SettingsPage() {
             <div className="mb-6 px-4 py-3 bg-green-50 border border-green-200 rounded-lg flex items-center gap-3">
               <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
               <p className="text-sm text-green-700 font-medium">
-                Settings saved successfully!
+                Settings saved successfully! Values verified from database.
               </p>
             </div>
           )}

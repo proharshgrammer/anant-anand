@@ -15,7 +15,7 @@ A phased journey to construct a high-performance Next.js 14 website and Supabase
 - [ ] **Phase 2: Tours & Blog CMS Managers** - Build admin CMS forms, Tiptap editor, image uploads, and map waypoint builder.
 - [ ] **Phase 3: Public Website & Age-Group Filtering** - Implement public pages layout, Homepage, and age-group filter search logic.
 - [x] **Phase 4: Tour Details, Maps & Lead Capture** - Render Tour Detail page, Leaflet.js route maps, and Supabase enquiries submission. ✅ Complete (2026-06-18)
-- [ ] **Phase 5: Blog Frontend, SEO & Verification** - Create public blog layouts, next-seo tag generators, JSON-LD schemas, and deploy.
+- [x] **Phase 5: Blog Frontend, SEO & Verification** - Create public blog layouts, next-seo tag generators, JSON-LD schemas, and deploy. ✅ Complete (2026-06-19)
 
 ## Phase Details
 
@@ -32,7 +32,7 @@ A phased journey to construct a high-performance Next.js 14 website and Supabase
   3. Admin can log in to `/admin` with email and password, and unauthenticated traffic to `/admin/*` redirects to `/admin/login`.
   4. Site Settings CMS and Enquiries manager tables are functional.
 
-**Plans**: 2 plans — **2/2 COMPLETE** ✅
+**Plans**: 4 plans — **4/4 COMPLETE** ✅
 
 Plans:
 **Wave 1**
@@ -42,6 +42,11 @@ Plans:
 **Wave 2**
 
 - [x] 01-02: Create Admin Dashboard layout, stats summary widgets, Recent Enquiries table, and Site Settings manager.
+
+### Gap Closure (Post-Verification)
+
+- [x] 01-03: Fix EnquiryTable sort sluggishness — extract SortIcon, add useMemo/useCallback
+- [x] 01-04: Fix Site Settings persistence — server action with service_role key, select-after-update verification, re-fetch
 
 ### Phase 2: Tours & Blog CMS Managers
 
@@ -117,8 +122,8 @@ Plans:
 
 Plans:
 
-- [ ] 05-01: Create blog listing routes (app/blog/) + blog detail with TOC + BlogCard/BlogPagination/BlogTableOfContents components + public blog queries + install @tailwindcss/typography + generateMetadata for all blog pages + Article JSON-LD on blog detail.
-- [ ] 05-02: Create static pages (Contact, About, Privacy, Terms) + update Footer links + add TouristTrip/LocalBusiness JSON-LD + configure next-sitemap + install + PageSpeed optimization pass.
+- [x] 05-01: Create blog listing routes (app/blog/) + blog detail with TOC + BlogCard/BlogPagination/BlogTableOfContents components + public blog queries + install @tailwindcss/typography + generateMetadata for all blog pages + Article JSON-LD on blog detail.
+- [x] 05-02: Create static pages (Contact, About, Privacy, Terms) + update Footer links + add TouristTrip/LocalBusiness JSON-LD + configure next-sitemap + install + PageSpeed optimization pass.
 
 ## Progress
 
@@ -131,4 +136,4 @@ Phases execute in numeric order: 1 → 2 → 3 → 4 → 5
 | 2. Tours & Blog CMS Managers | 3/3 | ✅ Complete | 2026-06-18 |
 | 3. Public Website & Age-Group Filtering | 2/2 | ✅ Complete | 2026-06-18 |
 | 4. Tour Details, Maps & Lead Capture | 2/2 | ✅ Complete | 2026-06-18 |
-| 5. Blog Frontend, SEO & Verification | 2/2 | Planned | 2026-06-19 |
+| 5. Blog Frontend, SEO & Verification | 2/2 | ✅ Complete | 2026-06-19 |

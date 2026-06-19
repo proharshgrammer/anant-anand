@@ -7,10 +7,7 @@ import { z } from 'zod';
 import { X, Loader2 } from 'lucide-react';
 import slugify from 'slugify';
 import ImageUploader from '@/components/admin/ImageUploader';
-import {
-  createDestination,
-  updateDestination,
-} from '@/lib/supabase/queries/destinations';
+import { createDestination, updateDestination } from '@/app/actions/destinations';
 import type { Destination } from '@/types';
 
 const schema = z.object({
@@ -85,7 +82,7 @@ export default function DestinationForm({
       if (isEditing && initialData?.id) {
         await updateDestination(initialData.id, payload);
       } else {
-        await createDestination(payload as Omit<Destination, 'id' | 'created_at'>);
+        await createDestination(payload);
       }
       onSaved();
     } catch (err) {

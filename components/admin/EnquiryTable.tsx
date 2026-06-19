@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import { formatDate, formatRelativeDate } from '@/lib/utils';
 import type { Enquiry, EnquiryStatus } from '@/types';
 import {
@@ -23,6 +23,15 @@ const STATUS_CONFIG: Record<EnquiryStatus, { label: string; class: string }> = {
 
 type SortKey = 'created_at' | 'name' | 'status';
 
+function SortIcon({ col, sortKey, sortDir }: { col: SortKey; sortKey: SortKey; sortDir: 'asc' | 'desc' }) {
+  if (sortKey !== col) return <ChevronUp className="w-3 h-3 opacity-30" />;
+  return sortDir === 'asc' ? (
+    <ChevronUp className="w-3 h-3 text-teal-600" />
+  ) : (
+    <ChevronDown className="w-3 h-3 text-teal-600" />
+  );
+}
+
 interface EnquiryTableProps {
   enquiries: Enquiry[];
 }
@@ -31,33 +40,22 @@ export default function EnquiryTable({ enquiries }: EnquiryTableProps) {
   const [sortKey, setSortKey] = useState<SortKey>('created_at');
   const [sortDir, setSortDir] = useState<'asc' | 'desc'>('desc');
 
-  const handleSort = (key: SortKey) => {
-    if (sortKey === key) {
-      setSortDir(sortDir === 'asc' ? 'desc' : 'asc');
-    } else {
-      setSortKey(key);
-      setSortDir('desc');
-    }
-  };
+  const handleSort = useCallback((key: SortKey) => {
+    setSortKey((prev) => key === prev ? prev : key);
+    setSortDir((prev) => key === sortKey ? (prev === 'asc' ? 'desc' : 'asc') : 'desc');
+  }, [sortKey]);
 
-  const sorted = [...enquiries].sort((a, b) => {
-    let valA = a[sortKey] ?? '';
-    let valB = b[sortKey] ?? '';
-    if (typeof valA === 'string') valA = valA.toLowerCase();
-    if (typeof valB === 'string') valB = valB.toLowerCase();
-    if (valA < valB) return sortDir === 'asc' ? -1 : 1;
-    if (valA > valB) return sortDir === 'asc' ? 1 : -1;
-    return 0;
-  });
-
-  const SortIcon = ({ col }: { col: SortKey }) => {
-    if (sortKey !== col) return <ChevronUp className="w-3 h-3 opacity-30" />;
-    return sortDir === 'asc' ? (
-      <ChevronUp className="w-3 h-3 text-teal-600" />
-    ) : (
-      <ChevronDown className="w-3 h-3 text-teal-600" />
-    );
-  };
+  const sorted = useMemo(() => {
+    return [...enquiries].sort((a, b) => {
+      let valA = a[sortKey] ?? '';
+      let valB = b[sortKey] ?? '';
+      if (typeof valA === 'string') valA = valA.toLowerCase();
+      if (typeof valB === 'string') valB = valB.toLowerCase();
+      if (valA < valB) return sortDir === 'asc' ? -1 : 1;
+      if (valA > valB) return sortDir === 'asc' ? 1 : -1;
+      return 0;
+    });
+  }, [enquiries, sortKey, sortDir]);
 
   if (enquiries.length === 0) {
     return (
@@ -78,7 +76,7 @@ export default function EnquiryTable({ enquiries }: EnquiryTableProps) {
               onClick={() => handleSort('name')}
             >
               <div className="flex items-center gap-1">
-                Name <SortIcon col="name" />
+                Name <SortIcon col="name" sortKey={sortKey} sortDir={sortDir} />
               </div>
             </th>
             <th className="px-4 py-3 text-left font-semibold text-gray-600">
@@ -92,7 +90,7 @@ export default function EnquiryTable({ enquiries }: EnquiryTableProps) {
               onClick={() => handleSort('status')}
             >
               <div className="flex items-center gap-1">
-                Status <SortIcon col="status" />
+                Status <SortIcon col="status" sortKey={sortKey} sortDir={sortDir} />
               </div>
             </th>
             <th
@@ -100,7 +98,7 @@ export default function EnquiryTable({ enquiries }: EnquiryTableProps) {
               onClick={() => handleSort('created_at')}
             >
               <div className="flex items-center gap-1">
-                Received <SortIcon col="created_at" />
+                Received <SortIcon col="created_at" sortKey={sortKey} sortDir={sortDir} />
               </div>
             </th>
           </tr>

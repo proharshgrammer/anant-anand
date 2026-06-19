@@ -11,8 +11,32 @@ export const metadata: Metadata = {
 export const dynamic = 'force-dynamic';
 
 export default function HomePage() {
+  // ── LocalBusiness JSON-LD structured data ───────────────
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'LocalBusiness',
+    name: 'Anant Anand Tour Packages',
+    description: 'Curated travel experiences tailored to every age group — Senior Pilgrims, Families, Youth, and School Groups.',
+    url: 'https://anantanandtourpackages.in',
+    telephone: '+91 123 456 7890',
+    email: 'namaste@anantanand.com',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '123 Ganga Vihar',
+      addressLocality: 'Rishikesh',
+      addressRegion: 'Uttarakhand',
+      postalCode: '249201',
+      addressCountry: 'IN',
+    },
+  };
+
   return (
-    <div className="min-h-screen">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <div className="min-h-screen">
       {/* 1. Hero Section */}
       <Hero />
 
@@ -72,5 +96,6 @@ export default function HomePage() {
       {/* 5-second delayed enquiry popup on homepage (LEAD-01, D-01) */}
       <EnquiryPopup sourcePage="/" delayMs={5000} />
     </div>
+    </>
   );
 }

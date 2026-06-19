@@ -98,8 +98,22 @@ export default async function TourDetailPage({
     tour.hero_image ||
     'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80';
 
+  // ── TouristTrip JSON-LD structured data ────────────────
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'TouristTrip',
+    name: tour.title,
+    description: tour.short_description || tour.description || undefined,
+    image: tour.hero_image || (tour.images?.[0]) || undefined,
+  };
+
   return (
-    <main className="min-h-screen bg-[#f0fdfa] pt-16">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <main className="min-h-screen bg-[#f0fdfa] pt-16">
       {/* ── Hero Banner ─────────────────────────────── */}
       <section className="relative h-[55vh] min-h-[380px] max-h-[560px] overflow-hidden">
         <img
@@ -374,5 +388,6 @@ export default async function TourDetailPage({
         delayMs={5000}
       />
     </main>
+    </>
   );
 }

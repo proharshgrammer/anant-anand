@@ -32,7 +32,10 @@ export default async function FeaturedTours() {
                   <img 
                     src={tour.hero_image || 'https://images.unsplash.com/photo-1514222134-b57fbb8ce073?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'} 
                     alt={tour.title}
+                    width={800}
+                    height={450}
                     className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
                   />
                   <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-semibold text-royal-800 shadow-sm">
                     {tour.category}
