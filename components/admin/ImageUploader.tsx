@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { Upload, X, CheckCircle, AlertCircle, Loader2, ImageIcon } from 'lucide-react';
-import { uploadImage } from '@/lib/supabase/queries/storage';
+import { uploadImageAction } from '@/app/actions/storage';
 import Image from 'next/image';
 
 export interface ImageUploaderProps {
@@ -54,7 +54,11 @@ export default function ImageUploader({
 
     setUploadState('uploading');
     try {
-      const { url } = await uploadImage(bucket, file, folder);
+      const formData = new FormData();
+      formData.append('bucket', bucket);
+      formData.append('folder', folder ?? '');
+      formData.append('file', file);
+      const { url } = await uploadImageAction(formData);
       onChange(url);
       setUploadState('success');
       setTimeout(() => setUploadState('idle'), 2000);
