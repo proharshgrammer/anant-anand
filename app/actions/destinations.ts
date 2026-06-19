@@ -16,6 +16,7 @@ export async function createDestination(data: {
   const { error } = await supabase.from('destinations').insert(data as never);
   if (error) throw new Error(error.message);
   revalidatePath('/admin/destinations');
+  revalidatePath('/destinations');
 }
 
 export async function updateDestination(
@@ -34,6 +35,7 @@ export async function updateDestination(
   const { error } = await supabase.from('destinations').update(data as never).eq('id', id);
   if (error) throw new Error(error.message);
   revalidatePath('/admin/destinations');
+  revalidatePath('/destinations');
 }
 
 export async function deleteDestination(id: string) {
@@ -41,4 +43,5 @@ export async function deleteDestination(id: string) {
   const { error } = await supabase.from('destinations').delete().eq('id', id);
   if (error) throw new Error(error.message);
   revalidatePath('/admin/destinations');
+  revalidatePath('/destinations');
 }

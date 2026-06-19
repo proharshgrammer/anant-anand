@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { createAdminClient } from '@/lib/supabase/admin';
 import type { Destination } from '@/types';
 
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: 'Top Destinations in India | Anant Anand',
   description: 'Explore the top spiritual and scenic destinations in India.',
